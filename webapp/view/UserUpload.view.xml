@@ -1,0 +1,71 @@
+<mvc:View controllerName="fg.userupload.controller.UserUpload" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <f:SimpleForm id="SimpleFormChangeColumn_oneGroup" editable="true" layout="ColumnLayout" title="User Details">
+                    <f:content>
+                        <Label text="Title" />
+                        <RadioButtonGroup id="idTitle" columns="5" select=".onChangeRadioButtonTitle">
+                            <RadioButton id="idTitle-1" text="Mr" />
+                            <RadioButton id="idTitle-2" text="Mrs." />
+                        </RadioButtonGroup>
+                        <Label text="Username" />
+                        <Input id="Username" value="{UserDataModel>/formData/Username}" />
+                        <Label text="First Name" />
+                        <Input id="FirstName" value="{UserDataModel>/formData/First Name}" />
+                        <Label text="Last Name" />
+                        <Input id="LastName" value="{UserDataModel>/formData/Last Name}" />
+                        <Label text="Person Country/Person City" />
+                        <Input value="{UserDataModel>/formData/Person Country}" />
+                        <Input value="{UserDataModel>/formData/Person City}" />
+                        <Label text="ZIP/Postal Code" />
+                        <Input value="{UserDataModel>/formData/ZIPPostal Code}" type="Number" />
+                        <Label text="City" />
+                        <Input value="{UserDataModel>/formData/City}" />
+                        <Label text="Primary Business Unit" />
+                        <Input value="{UserDataModel>/formData/Primary Business Unit}" />
+                        <Label text="Primary Supervisor Username" />
+                        <Input value="{UserDataModel>/formData/Primary Supervisor Username}" />
+                        <Label text="Person State Province" />
+                        <Input value="{UserDataModel>/formData/Person State Province}" />
+                        <Label text="Person Address 1" />
+                        <Input value="{UserDataModel>/formData/Person Address 1}" />
+                        <Label text="Person Address 2" />
+                        <Input value="{UserDataModel>/formData/Person Address 2}" />
+                        <Label text="State/Province" />
+                        <Input value="{UserDataModel>/formData/StateProvince}" />
+                        <Label text="Country" />
+                        <Select id="country" selectedKey="{UserDataModel>/formData/Country}">
+                            <items>
+                                <core:Item text="India" key="India" />
+                                <core:Item text="Canada" key="Canada" />
+                                <core:Item text="USA" key="USA" />
+                            </items>
+                        </Select>
+                        <Label text="Email" />
+                        <Input id="Email" value="{UserDataModel>/formData/Email}" type="Email" />
+                        <Label text="Company Name" />
+                        <Input id="CompanyName" value="{UserDataModel>/formData/Company Name}" />
+
+                        <Label text="Person Phone Number" />
+                        <Input id="PersonPhoneNumber" value="{UserDataModel>/formData/Person Phone Number}" type="Tel" />
+                        <Label text="Address 1" />
+                        <Input id="Address1" value="{UserDataModel>/formData/Address 1}" />
+                        <Label text="Person Postal Code" />
+                        <Input id="PersonPostalCode" value="{UserDataModel>/formData/Person Postal Code}" />
+                        <Label text="Role Name" />
+                        <Input id="RoleName" value="{UserDataModel>/formData/Role Name}" />
+                        <Label text="Phone Number" />
+                        <Input id="PhoneNumber" value="{UserDataModel>/formData/Phone Number}" type="Tel" />
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button text="Save User" type="Accept" press=".onPressSaveUser" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

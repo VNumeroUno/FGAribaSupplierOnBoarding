@@ -1,0 +1,98 @@
+_schema-version: "3.2"
+ID: fg-userupload
+description: Survey
+version: 0.0.1
+modules:
+- name: fg-userupload-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: SAPFieldGlass
+  - name: fg-userupload-destination-service
+    parameters:
+      content-target: true
+  - name: fg-userupload-repo-host
+    parameters:
+      service-key:
+        name: fg-userupload-repo-host-key
+  - name: fg-userupload-uaa
+    parameters:
+      service-key:
+        name: fg-userupload-uaa-key
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: fg-userupload_html_repo_host
+          ServiceInstanceName: fg-userupload-html5-srv
+          ServiceKeyName: fg-userupload-repo-host-key
+          sap.cloud.service: fg-userupload
+        - Authentication: OAuth2UserTokenExchange
+          Name: fg-userupload_uaa
+          ServiceInstanceName: fg-userupload-xsuaa-srv
+          ServiceKeyName: fg-userupload-uaa-key
+          sap.cloud.service: fg-userupload
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: fg-userupload-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: SAPFieldGlass
+  - name: fg-userupload-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - fguserupload.zip
+      name: fguserupload
+      target-path: resources/
+- name: fguserupload
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: fg-userupload-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: fg-userupload-destination-service
+    service-plan: lite
+- name: fg-userupload-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: fg-userupload-xsuaa-srv
+    service-plan: application
+- name: fg-userupload-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: fg-userupload-html5-srv
+    service-plan: app-host
+- name: SAPFieldGlass
+  type: org.cloudfoundry.existing-service
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
