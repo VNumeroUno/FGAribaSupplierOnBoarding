@@ -29,3 +29,4 @@ server:
       configuration:
         component: fg.userupload
         ui5Theme: sap_horizon
+

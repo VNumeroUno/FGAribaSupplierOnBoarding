@@ -2,7 +2,7 @@
     <Page id="page" title="{i18n>title}">
         <content>
             <VBox class="sapUiSmallMargin">
-                <f:SimpleForm id="SimpleFormChangeColumn_oneGroup" editable="true" layout="ColumnLayout" title="User Details">
+                <f:SimpleForm id="SimpleFormChangeColumn_oneGroup1" editable="true" layout="ColumnLayout" title="User Details">
                     <f:content>
                         <Label text="Title" />
                         <RadioButtonGroup id="idTitle" columns="5" select=".onChangeRadioButtonTitle">

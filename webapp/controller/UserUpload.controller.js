@@ -74,10 +74,10 @@ sap.ui.define([
                 const appPath = appId.replaceAll(".", "/");
                 const appModulePath = jQuery.sap.getModulePath(appPath);
                 const sAccessToken = this.getModel("UserDataModel").getProperty("/accessToken");
-                let payloadObj = {};
-                payloadObj.data = [];
-                payloadObj.data.push(oUserModelData);
-                payloadObj.headers = {
+                let payloadObject = {};
+                payloadObject.data = [];
+                payloadObject.data.push(oUserModelData);
+                payloadObject.headers = {
                         "Type": "user_upload",
                         "Transaction": "True",
                         "Send Notification?": "True",
@@ -102,7 +102,7 @@ sap.ui.define([
                         "x-ApplicationKey": "CYPDSD2L2GqlRYeV3VfY6rCTlaP",
                         "Authorization": `Bearer ${sAccessToken}`,
                     },
-                    data:JSON.stringify(payloadObj),
+                    data:JSON.stringify(payloadObject),
 					async: false,
                     success: function (response) {
                         that.getView().setBusy(false);
